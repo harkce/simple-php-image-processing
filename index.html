@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+</head>
+<body>
+<div class="row">
+	<div class="col m6">
+		<div class="row right-align">
+			<div class="file-field input-field">
+				<div class="waves-effect waves-light btn">
+					<span>Select Image</span>
+					<input id="image-up" name="image" type="file" accept="image/*" onchange="original()">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="progress" class="col m6" hidden>
+		<h4>Loading...</h4>
+	</div>
+</div>
+<div class="row center-align">
+	<div class="col m12">
+		<button class="waves-effect waves-light btn" onclick="original()">Original</button>
+		<button class="waves-effect waves-light btn" onclick="grayscale()">Grayscale</button>
+		<button class="waves-effect waves-light btn" onclick="slide('left')"><i class="material-icons">keyboard_arrow_left</i></button>
+		<button class="waves-effect waves-light btn" onclick="slide('right')"><i class="material-icons">keyboard_arrow_right</i></button>
+		<button class="waves-effect waves-light btn" onclick="slide('up')"><i class="material-icons">keyboard_arrow_up</i></button>
+		<button class="waves-effect waves-light btn" onclick="slide('down')"><i class="material-icons">keyboard_arrow_down</i></button>
+		<button class="waves-effect waves-light btn" onclick="zoom('in')"><i class="material-icons">zoom_in</i></button>
+		<button class="waves-effect waves-light btn" onclick="zoom('out')"><i class="material-icons">zoom_out</i></button>
+		<button class="waves-effect waves-light btn" onclick="rotate('left')"><i class="material-icons">rotate_left</i></button>
+		<button class="waves-effect waves-light btn" onclick="rotate('right')"><i class="material-icons">rotate_right</i></button>
+		<button class="waves-effect waves-light btn" onclick="brightness('inc')"><i class="material-icons">brightness_high</i></button>
+		<button class="waves-effect waves-light btn" onclick="brightness('dec')"><i class="material-icons">brightness_low</i></button><br><br>
+		<button class="waves-effect waves-light btn" onclick="smooth('mean')">Mean Smooth</button>
+		<button class="waves-effect waves-light btn" onclick="smooth('median')">Median Smooth</button>
+	</div>
+</div>
+<div class="row">
+	<div class="col m6">
+		<div class="row center-align">
+			<h4>Original Image</h4>
+		</div>
+		<div class="row center-align">
+			<img id="ori-image">
+		</div>
+	</div>
+	<div class="col m6">
+		<div class="row center-align">
+			<h4>Edited Image</h4>
+		</div>
+		<div class="row center-align">
+			<img id="edit-image">
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="js/code.js"></script>
+</body>
+</html>
