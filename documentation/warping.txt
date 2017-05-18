@@ -1,0 +1,29 @@
+Fungsi Zigzag warping
+==============================================================================
+Algoritma:
+
+for ($y=0; $y < $height; $y++) { 
+
+	//apabila baris matriks kelipatan 2, geser kiri
+	if (($y % 2 == 0)) {
+		for ($x=0; $x < ($width - 1); $x++) { 
+			$warpedr[$x][$y] = $r[$x + 1][$y];
+			$warpedg[$x][$y] = $g[$x + 1][$y];
+			$warpedb[$x][$y] = $b[$x + 1][$y];
+		}
+		$warpedr[$width - 1][$y] = 0;
+		$warpedg[$width - 1][$y] = 0;
+		$warpedb[$width - 1][$y] = 0;
+
+	//apabila baris matriks bukan kelipatan 2, geser kanan
+	} else {
+		for ($x=1; $x < $width; $x++) { 
+			$warpedr[$x][$y] = $r[$x - 1][$y];
+			$warpedg[$x][$y] = $g[$x - 1][$y];
+			$warpedb[$x][$y] = $b[$x - 1][$y];
+		}
+		$warpedr[0][$y] = 0;
+		$warpedg[0][$y] = 0;
+		$warpedb[0][$y] = 0;
+	}
+}

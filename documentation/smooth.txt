@@ -1,0 +1,148 @@
+Fungsi Image Smoothing
+==============================================================================
+------------------------------------------------------
+Bagian 1 - Fungsi mencari median
+------------------------------------------------------
+Algoritma:
+
+function median($arr) {
+    $count = count($arr);
+    $middleval = floor(($count-1)/2);
+    if($count % 2) {
+        $median = $arr[$middleval];
+    } else {
+        $low = $arr[$middleval];
+        $high = $arr[$middleval+1];
+        $median = (($low+$high)/2);
+    }
+    return $median;
+}
+
+------------------------------------------------------
+Bagian 2 - Fungsi Smoothing
+------------------------------------------------------
+for ($y=0; $y < $height; $y++) { 
+	for ($x=0; $x < $width; $x++) {
+		
+		//variabel yang digunakan untuk mean smoothing
+		$count = 0;
+		$sumr = 0;
+		$sumg = 0;
+		$sumb = 0;
+
+		//variable yang digunakan untuk median smoothing
+		$arrr = [];
+		$arrg = [];
+		$arrb = [];
+
+		//tetangga matriks kiri atas
+		if (isset($r[$x-1][$y-1])) {
+			$count++;
+			$sumr += $r[$x-1][$y-1];
+			$sumg += $g[$x-1][$y-1];
+			$sumb += $b[$x-1][$y-1];
+			array_push($arrr, $r[$x-1][$y-1]);
+			array_push($arrg, $g[$x-1][$y-1]);
+			array_push($arrb, $b[$x-1][$y-1]);
+		}
+
+		//tetangga matriks atas
+		if (isset($r[$x][$y-1])) {
+			$count++;
+			$sumr += $r[$x][$y-1];
+			$sumg += $g[$x][$y-1];
+			$sumb += $b[$x][$y-1];
+			array_push($arrr, $r[$x][$y-1]);
+			array_push($arrg, $g[$x][$y-1]);
+			array_push($arrb, $b[$x][$y-1]);
+		}
+
+		//tetangga matriks kanan atas
+		if (isset($r[$x+1][$y-1])) {
+			$count++;
+			$sumr += $r[$x+1][$y-1];
+			$sumg += $g[$x+1][$y-1];
+			$sumb += $b[$x+1][$y-1];
+			array_push($arrr, $r[$x+1][$y-1]);
+			array_push($arrg, $g[$x+1][$y-1]);
+			array_push($arrb, $b[$x+1][$y-1]);
+		}
+
+		//tetangga matriks kiri
+		if (isset($r[$x-1][$y])) {
+			$count++;
+			$sumr += $r[$x-1][$y];
+			$sumg += $g[$x-1][$y];
+			$sumb += $b[$x-1][$y];
+			array_push($arrr, $r[$x-1][$y]);
+			array_push($arrg, $g[$x-1][$y]);
+			array_push($arrb, $b[$x-1][$y]);
+		}
+
+		//tetangga matriks kanan
+		if (isset($r[$x+1][$y])) {
+			$count++;
+			$sumr += $r[$x+1][$y];
+			$sumg += $g[$x+1][$y];
+			$sumb += $b[$x+1][$y];
+			array_push($arrr, $r[$x+1][$y]);
+			array_push($arrg, $g[$x+1][$y]);
+			array_push($arrb, $b[$x+1][$y]);
+		}
+
+		//tetangga matriks kiri bawah
+		if (isset($r[$x-1][$y+1])) {
+			$count++;
+			$sumr += $r[$x-1][$y+1];
+			$sumg += $g[$x-1][$y+1];
+			$sumb += $b[$x-1][$y+1];
+			array_push($arrr, $r[$x-1][$y+1]);
+			array_push($arrg, $g[$x-1][$y+1]);
+			array_push($arrb, $b[$x-1][$y+1]);
+		}
+
+		//tetangga matriks bawah
+		if (isset($r[$x][$y+1])) {
+			$count++;
+			$sumr += $r[$x][$y+1];
+			$sumg += $g[$x][$y+1];
+			$sumb += $b[$x][$y+1];
+			array_push($arrr, $r[$x][$y+1]);
+			array_push($arrg, $g[$x][$y+1]);
+			array_push($arrb, $b[$x][$y+1]);
+		}
+
+		//tetangga matriks kanan bawah
+		if (isset($r[$x+1][$y+1])) {
+			$count++;
+			$sumr += $r[$x+1][$y+1];
+			$sumg += $g[$x+1][$y+1];
+			$sumb += $b[$x+1][$y+1];
+			array_push($arrr, $r[$x+1][$y+1]);
+			array_push($arrg, $g[$x+1][$y+1]);
+			array_push($arrb, $b[$x+1][$y+1]);
+		}
+
+		//apabila mean smoothing
+		if ($direction == 'mean') {
+			if ($count == 0) {
+				$smoothedr[$x][$y] = 0;
+				$smoothedg[$x][$y] = 0;
+				$smoothedb[$x][$y] = 0;
+			} else {
+				$smoothedr[$x][$y] = (int) ceil($sumr/(float) $count);
+				$smoothedg[$x][$y] = (int) ceil($sumg/(float) $count);
+				$smoothedb[$x][$y] = (int) ceil($sumb/(float) $count);
+			}
+
+		//apabila median smoothing
+		} else {
+			sort($arrr);
+			sort($arrg);
+			sort($arrb);
+			$smoothedr[$x][$y] = median($arrr);
+			$smoothedg[$x][$y] = median($arrg);
+			$smoothedb[$x][$y] = median($arrb);
+		}
+	}
+}

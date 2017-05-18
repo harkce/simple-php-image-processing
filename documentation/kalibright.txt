@@ -1,0 +1,24 @@
+Fungsi Double/Half Brightness
+==============================================================================
+Algoritma:
+
+//mode increase/decrease brightness
+$bright = ($direction == 'kali') ?: false;
+for ($y=0; $y < $height; $y++) { 
+	for ($x=0; $x < $width; $x++) {
+		//inc or dec = mengalikan/membagi nilai setiap elemen dengan 2
+		$brightedr[$x][$y] = $bright ? ($r[$x][$y] * 2) : (int) ceil(($r[$x][$y] /(float) 2));
+		$brightedg[$x][$y] = $bright ? ($g[$x][$y] * 2) : (int) ceil(($g[$x][$y] /(float) 2));
+		$brightedb[$x][$y] = $bright ? ($b[$x][$y] * 2) : (int) ceil(($b[$x][$y] /(float) 2));
+
+		//cek kelebihan, apabila setelah penambahan melebihi 255, maka akan dikembalikan menjadi 255
+		if ($brightedr[$x][$y] > 255) { $brightedr[$x][$y] = 255; }
+		if ($brightedg[$x][$y] > 255) { $brightedg[$x][$y] = 255; }
+		if ($brightedb[$x][$y] > 255) { $brightedb[$x][$y] = 255; }
+
+		//cek kekurangan, apabila setelah pengurangan kurang dari 0, maka akan dikembalikan menjadi 0
+		if ($brightedr[$x][$y] < 0) { $brightedr[$x][$y] = 0; }
+		if ($brightedg[$x][$y] < 0) { $brightedg[$x][$y] = 0; }
+		if ($brightedb[$x][$y] < 0) { $brightedb[$x][$y] = 0; }
+	}
+}

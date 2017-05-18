@@ -1,0 +1,10 @@
+Fungsi Grayscale
+==============================================================================
+Algoritma:
+
+//mengambil nilai rata-rata dari 3 matriks rgb
+for ($y=0; $y < $height; $y++) { 
+	for ($x=0; $x < $width; $x++) {
+		$abu[$x][$y] = round(($r[$x][$y] + $g[$x][$y] + $b[$x][$y]) / (float) 3);
+	}
+}

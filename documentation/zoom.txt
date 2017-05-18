@@ -1,0 +1,47 @@
+Fungsi Zoom
+==============================================================================
+Algoritma:
+
+//fungsi untuk zoom in
+if ($direction == 'in') {
+	for ($y=0; $y <= $height; $y++) { 
+		for ($x=0; $x <= $width; $x++) { 
+			//elemen tetangga kiri atas matriks
+			$zoomedr[$x][$y] = isset($r[$x - 1][$y - 1]) ? $r[$x - 1][$y - 1] : 0;
+			$zoomedg[$x][$y] = isset($g[$x - 1][$y - 1]) ? $g[$x - 1][$y - 1] : 0;
+			$zoomedb[$x][$y] = isset($b[$x - 1][$y - 1]) ? $b[$x - 1][$y - 1] : 0;
+			
+			//elemen tetangga kanan atas matriks
+			$zoomedr[$x][$y] += isset($r[$x][$y - 1]) ? $r[$x][$y - 1] : 0;
+			$zoomedg[$x][$y] += isset($g[$x][$y - 1]) ? $g[$x][$y - 1] : 0;
+			$zoomedb[$x][$y] += isset($b[$x][$y - 1]) ? $b[$x][$y - 1] : 0;
+			
+			//elemen tetangga kiri bawah matriks
+			$zoomedr[$x][$y] += isset($r[$x - 1][$y]) ? $r[$x - 1][$y] : 0;
+			$zoomedg[$x][$y] += isset($g[$x - 1][$y]) ? $g[$x - 1][$y] : 0;
+			$zoomedb[$x][$y] += isset($b[$x - 1][$y]) ? $b[$x - 1][$y] : 0;
+			
+			//elemen tetangga kanan bawah matriks
+			$zoomedr[$x][$y] += isset($r[$x][$y]) ? $r[$x][$y] : 0;
+			$zoomedg[$x][$y] += isset($g[$x][$y]) ? $g[$x][$y] : 0;
+			$zoomedb[$x][$y] += isset($b[$x][$y]) ? $b[$x][$y] : 0;
+			
+			//elemen tetangga rata-rata matriks
+			$zoomedr[$x][$y] = (int) ceil((float) $zoomedr[$x][$y] / 4);
+			$zoomedg[$x][$y] = (int) ceil((float) $zoomedg[$x][$y] / 4);
+			$zoomedb[$x][$y] = (int) ceil((float) $zoomedb[$x][$y] / 4);
+		}
+	}
+	$height++;
+	$width++;
+} else {
+	for ($y=0; $y < ($height - 1); $y++) { 
+		for ($x=0; $x < ($width - 1); $x++) { 
+			$zoomedr[$x][$y] = (int) ceil(($r[$x][$y] + $r[$x + 1][$y] + $r[$x][$y + 1] + $r[$x + 1][$y + 1])/(float) 4);
+			$zoomedg[$x][$y] = (int) ceil(($g[$x][$y] + $g[$x + 1][$y] + $g[$x][$y + 1] + $g[$x + 1][$y + 1])/(float) 4);
+			$zoomedb[$x][$y] = (int) ceil(($b[$x][$y] + $b[$x + 1][$y] + $b[$x][$y + 1] + $b[$x + 1][$y + 1])/(float) 4);
+		}
+	}
+	$height--;
+	$width--;
+}
