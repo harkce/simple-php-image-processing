@@ -173,6 +173,33 @@ function brightness(direction) {
 	});
 }
 
+function kalibright(direction) {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/kalibright.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height,
+			direction: direction
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
 function slide(direction) {
 	$('#progress').show();
 	$.ajax({
@@ -205,6 +232,59 @@ function smooth(direction) {
 	$.ajax({
 		type: 'POST',
 		url: 'function/smooth.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height,
+			direction: direction
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
+function warp() {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/warping.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
+function convulsion(direction) {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/convulsion.php',
 		data: {
 			r: JSON.stringify(edited.r),
 			g: JSON.stringify(edited.g),
