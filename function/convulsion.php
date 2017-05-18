@@ -57,6 +57,15 @@ for ($y=0; $y < $height; $y++) {
 		$convultedr[$x][$y] = dotmat($m1r, $m2, $direction);
 		$convultedg[$x][$y] = dotmat($m1g, $m2, $direction);
 		$convultedb[$x][$y] = dotmat($m1b, $m2, $direction);
+
+		//cek kelebihan
+		if ($convultedr[$x][$y] > 255) { $convultedr[$x][$y] = 255; }
+		if ($convultedg[$x][$y] > 255) { $convultedg[$x][$y] = 255; }
+		if ($convultedb[$x][$y] > 255) { $convultedb[$x][$y] = 255; }
+		//cek kekurangan
+		if ($convultedr[$x][$y] < 0) { $convultedr[$x][$y] = 0; }
+		if ($convultedg[$x][$y] < 0) { $convultedg[$x][$y] = 0; }
+		if ($convultedb[$x][$y] < 0) { $convultedb[$x][$y] = 0; }
 	}
 }
 

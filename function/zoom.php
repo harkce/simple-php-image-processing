@@ -10,6 +10,7 @@ $direction = $_POST['direction'];
 $zoomedr = [[]];
 $zoomedg = [[]];
 $zoomedb = [[]];
+
 if ($direction == 'in') {
 	for ($y=0; $y <= $height; $y++) { 
 		for ($x=0; $x <= $width; $x++) { 

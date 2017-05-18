@@ -306,3 +306,107 @@ function convulsion(direction) {
 		async: false
 	});
 }
+
+function sharpen() {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/sharpen.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
+function edge() {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/edge.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
+function erosion() {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/erosion.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
+
+function dilation() {
+	$('#progress').show();
+	$.ajax({
+		type: 'POST',
+		url: 'function/dilation.php',
+		data: {
+			r: JSON.stringify(edited.r),
+			g: JSON.stringify(edited.g),
+			b: JSON.stringify(edited.b),
+			width: edited.width,
+			height: edited.height
+		},
+		success: function(data) {
+			data = JSON.parse(data);
+			$('#edit-image').attr('src', data.base64);
+			$('#progress').hide();
+			edited.r = data.r;
+			edited.g = data.g;
+			edited.b = data.b;
+			edited.width = parseInt(data.width);
+			edited.height = parseInt(data.height);
+		},
+		async: false
+	});
+}
